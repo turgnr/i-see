@@ -1,21 +1,87 @@
-import React, { PropTypes, Component,useEffect } from 'react';
+import React, { PropTypes, Component, useEffect } from 'react';
 import { StyleSheet, Text, View, Alert, Image, ImageBackground, Button } from 'react-native';
-import SplashScreen from 'react-native-splash-screen'
-import { Audio } from 'expo-av'
+import { Audio } from 'expo-av';
+
+export default function Start({ navigation }) {
+  start();//active the voice to unuseual user
+  /**
+   * function to navigation to other screen 
+   */
+  const preesHandler = () => {
+    navigation.navigate('HomeRU');
+  }
 
 
 
-export default function Start() {
-
-return(<ImageBackground source={require('./assets/eye.png')} style={styles.image}>
-<Text style={styles.header}>Hello Please wait</Text>
-<View>
-  <Text style={styles.text}>שלום לך למשתמש רגיל לחץ מטה</Text>
-  <Button
-    title="Press me"
-    color="gray"
-    onPress={() => Alert.alert('זה עובד לא סתם!!')}
-  />
-</View>
-</ImageBackground>);
+  return (
+    <ImageBackground source={require('../assets/eye.png')} style={styles.image}>
+      <Text style={styles.header}>Hello Please wait</Text>
+      <View>
+        <Text style={styles.text}>שלום לך למשתמש רגיל לחץ מטה</Text>
+        <Button
+          title="Regular User"
+          color="gray"
+          onPress={preesHandler}
+        />
+      </View>
+    </ImageBackground>
+  );
 }
+
+start = async () => {
+  const soundObject = new Audio.Sound()
+  try {
+    let source = require('../assets/start.m4a')
+    await soundObject.loadAsync(source)
+    await soundObject
+      .playAsync()
+      .then(async playbackStatus => {
+        setTimeout(() => {
+          soundObject.unloadAsync()
+        }, playbackStatus.playableDurationMillis)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    console.log("sound active");
+  } catch (error) {
+    console.log(error)
+  }
+};
+
+function tryTest() {
+  alert("need add button and instraction voice")
+}
+/**
+ *  style section each part with a specific style
+ * container - all screen cover by image
+ * image - the image is use to be a background
+ * text - is the instraction top of button
+ * headrer - is the headlight of top screen
+*/
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'stretch'
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: 'space-around',
+  },
+  text: {
+    color: "blue",
+    fontSize: 25,
+    fontWeight: "bold",
+    height: 50,
+    backgroundColor: 'red'
+  },
+  header: {
+    color: "blue",
+    fontSize: 25,
+    fontWeight: "bold",
+    height: 50,
+    backgroundColor: 'skyblue'
+  }
+});

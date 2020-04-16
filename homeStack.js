@@ -1,7 +1,7 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import regularUser from './components/regularUser'
-import start from './components/start'
+import Start from './components/start'
 const screen = {
     Start:{
         screen: Start
