@@ -4,22 +4,17 @@ import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
 
-export default class regularUser extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      mapRegion: null,
-      hasLocationPermissions: false,
-      locationResult: null
-    };
-  }
-  
-
+export default class test extends React.Component {
+  state = {
+    mapRegion: null,
+    hasLocationPermissions: false,
+    locationResult: null
+  };
   componentDidMount() {
     this.getLocationAsync();
   }
-/**there is a problam with this function every time we touch on map its throw error or warnings */
-  async handleMapRegionChange(mapRegion) {
+
+  handleMapRegionChange(mapRegion) {
     console.log(mapRegion);
     this.setState({ mapRegion });
   }
