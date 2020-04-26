@@ -2,15 +2,21 @@ import React, { PropTypes, Component, useEffect } from 'react';
 import { StyleSheet, Text, View, Alert, Image, ImageBackground, Button } from 'react-native';
 import { Audio } from 'expo-av';
 
+
+
 export default function Start({ navigation }) {
-  start();//active the voice to unuseual user
   /**
    * function to navigation to other screen 
    */
-  const preesHandler = () => {
+   preesHandler = ()=> {
     navigation.navigate('HomeRU');
   }
-
+   preesTest= ()=>{
+    navigation.navigate('Test');
+  }
+  start();//active the voice to unuseual user
+  interval();
+  
 
 
   return (
@@ -25,6 +31,7 @@ export default function Start({ navigation }) {
         />
       </View>
     </ImageBackground>
+
   );
 }
 
@@ -43,15 +50,15 @@ start = async () => {
       .catch(error => {
         console.log(error)
       })
-    console.log("sound active");
   } catch (error) {
-    console.log(error)
   }
 };
 
-function tryTest() {
-  alert("need add button and instraction voice")
-}
+interval = async () => {
+  setTimeout(navigation.navigate('Test'), 8000);
+};
+
+
 /**
  *  style section each part with a specific style
  * container - all screen cover by image
