@@ -1,3 +1,3 @@
 יישומי אינטרנט מבוזר
-# -- npm start
-# -- npm install
+# -- npm start - to active the app
+# -- npm install - to install dependency
