@@ -9,6 +9,9 @@ import splash from "./screens/Visually_limited_Page";
 const screen = {
   Splash: {
     screen: splash,
+    //navigationOptions: {
+    //header: null,
+    //},
   },
   Start: {
     screen: tryStart,

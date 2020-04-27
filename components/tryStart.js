@@ -16,17 +16,8 @@ import { Audio } from "expo-av";
 export default class tryStart extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.navigation);
-    this.start();
-    this.interval();
-    this.timeOut = false;
-    console.log("end counstractor");
-  }
-  preesHandler() {
-    navigation.navigate("HomeRU");
-  }
-  preesTest() {
-    navigation.navigate("Test");
+    clearInterval(interval);
+    start();
   }
 
   start = async () => {
@@ -46,15 +37,6 @@ export default class tryStart extends React.Component {
         });
     } catch (error) {}
   };
-
-  interval = async () => {
-    setTimeout(() => {
-      this.props.navigation.navigate("Test");
-    }, 8000);
-    //setTimeout(console.log("work"), 8000);
-    //setTimeout(this.props.navigation.navigate("Test"), 8000);
-  };
-
   render() {
     return (
       <ImageBackground
@@ -67,7 +49,7 @@ export default class tryStart extends React.Component {
           <Button
             title="Regular User"
             color="gray"
-            onPress={this.preesHandler}
+            onPress={() => this.props.navigation.navigate("HomeRU")}
           />
         </View>
       </ImageBackground>
