@@ -36,16 +36,6 @@ export default class tryStart extends React.Component {
         });
     } catch (error) {}
   };
-<<<<<<< HEAD
-=======
-/**
- * this for time out for regular user 
- */
-  interval = async () => {
-    setTimeout(() => { this.props.navigation.navigate("Test"); }, 8000);
-  };
-
->>>>>>> bb0f0049b53d23ef423632c6f63d87e66adf88e0
   render() {
     return (
       <ImageBackground
