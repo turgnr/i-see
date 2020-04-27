@@ -16,22 +16,9 @@ import { Audio } from "expo-av";
 export default class tryStart extends React.Component {
   constructor(props) {
     super(props);
-<<<<<<< HEAD
     clearInterval(interval);
     start();
-=======
-    this.start();
-    this.interval();
-    this.timeOut = false;
-    }
-  preesHandler() {
-    navigation.navigate("HomeRU");
   }
-  preesTest() {
-    navigation.navigate("Test");
->>>>>>> bb0f0049b53d23ef423632c6f63d87e66adf88e0
-  }
-
   start = async () => {
     const soundObject = new Audio.Sound();
     try {
