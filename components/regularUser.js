@@ -11,6 +11,8 @@ export default class regularUser extends React.Component {
       mapRegion: null,
       hasLocationPermissions: false,
       locationResult: null,
+      curlet:31.626328, 
+      curlon:34.582968
     };
   }
   componentDidMount() {
@@ -32,7 +34,9 @@ export default class regularUser extends React.Component {
     this.setState({ locationResult: JSON.stringify(location) });
 
     // Center the map on the location we just fetched.
-    this.setState({ mapRegion: { latitude: location.coords.latitude, longitude: location.coords.longitude, latitudeDelta: 0.015186303586663286, longitudeDelta: 0.010021738708019257 } });
+   // this.setState({ mapRegion: { latitude: location.coords.latitude, longitude: location.coords.longitude, latitudeDelta: 0.015186303586663286, longitudeDelta: 0.010021738708019257 } });
+    //מיקום קבוע של נקודה באשקלון בתוך אזור מסחרי עם הרבה בתי עסק
+    this.setState({ mapRegion: { latitude: this.curlet, longitude: this.curlon, latitudeDelta: 0.015186303586663286, longitudeDelta: 0.010021738708019257 } });
   }
   render() {
     return (
@@ -45,7 +49,7 @@ export default class regularUser extends React.Component {
             latitude: 31.532357,
             longitude: 34.588387
           }}
-            radius={50} /></MapView>
+            radius={100}/></MapView>
       </View>
     );
   }

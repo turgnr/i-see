@@ -1,20 +1,15 @@
 import React, { PropTypes, Component, useEffect } from 'react';
 import { StyleSheet, Text, View, Alert, ImageBackground, Button } from 'react-native';
 import { Audio } from 'expo-av';
-/**
- * לבדוק איך אפשר לרנדר את האפליקציה לפי זמן באמצעות פונקציות של render 
- * וגם להבין למה אין זיהוי של משתנה הנייוט בין מסכים
- */
-var navigation = props.navigation; 
+
+
 export default class tryStart extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.navigation);
     this.start();
     this.interval();
     this.timeOut = false;
-    console.log("end counstractor")
-  }
+    }
   preesHandler() {
     navigation.navigate('HomeRU');
   }
@@ -41,10 +36,11 @@ export default class tryStart extends React.Component {
     } catch (error) {
     }
   };
-
+/**
+ * this for time out for regular user 
+ */
   interval = async () => {
-  setTimeout(console.log('work'),8000);
-  //setTimeout(navigation.navigate('Test'), 8000);
+    setTimeout(() => { this.props.navigation.navigate("Test"); }, 8000);
   };
 
   render() {

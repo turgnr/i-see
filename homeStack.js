@@ -1,12 +1,12 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import regularUser from './components/regularUser'
-import Start from './components/start'
+import tryStart from './components/tryStart'
 import test from './components/test'
 
 const screen = {
     Start:{
-        screen: Start
+        screen: tryStart
     },
     HomeRU:{
         screen:regularUser
