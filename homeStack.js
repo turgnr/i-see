@@ -1,20 +1,25 @@
-import { createStackNavigator } from 'react-navigation-stack';
-import { createAppContainer } from 'react-navigation';
-import regularUser from './components/regularUser'
-import tryStart from './components/tryStart'
-import test from './components/test'
+import { createStackNavigator } from "react-navigation-stack";
+import { createAppContainer } from "react-navigation";
+import regularUser from "./components/regularUser";
+import Start from "./components/start";
+import test from "./components/test";
+import tryStart from "./components/tryStart";
+import splash from "./screens/Visually_limited_Page";
 
 const screen = {
-    Start:{
-        screen: tryStart
-    },
-    HomeRU:{
-        screen:regularUser
-    },
-    Test:{
-        screen:test
-    }
-}
+  Splash: {
+    screen: splash,
+  },
+  Start: {
+    screen: tryStart,
+  },
+  HomeRU: {
+    screen: regularUser,
+  },
+  Test: {
+    screen: test,
+  },
+};
 
 const HomeStack = createStackNavigator(screen);
 
