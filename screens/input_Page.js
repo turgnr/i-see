@@ -36,7 +36,12 @@ export default class InputPage extends React.Component {
           <MapView
             provider={PROVIDER_GOOGLE}
             style={styles.mapStyle}
-            //region={this.state.mapRegion}
+            region={{
+              latitude: 31.626328,
+              longitude: 34.582968,
+              latitudeDelta: 0.015186303586663286,
+              longitudeDelta: 0.010021738708019257,
+            }}
           ></MapView>
         </View>
       </View>
@@ -89,9 +94,13 @@ const styles = StyleSheet.create({
     marginTop: 30,
     width: screenWidth - 50,
     height: 200,
-    backgroundColor: "#8D8D8D",
+    backgroundColor: "#fff",
     borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
+  },
+  mapStyle: {
+    width: screenWidth - 50,
+    height: 200,
   },
 });
