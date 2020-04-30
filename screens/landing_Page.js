@@ -24,7 +24,7 @@ export default class Landing extends React.Component {
         const location = JSON.stringify(position);
 
         this.setState({ location });
-        if (this.state.location != null) this.props.navigation.replace("Start");
+        if (this.state.location != null) this.props.navigation.replace("Map");
       },
       (error) => Alert.alert("נא לאשר גישת מיקום כדי להמשיך"),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }

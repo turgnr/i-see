@@ -5,6 +5,7 @@ import test from "./components/test";
 import tryStart from "./components/tryStart";
 import splash from "./screens/Visually_limited_Page";
 import landing from "./screens/landing_Page";
+import map from "./screens/map_page";
 
 const screen = {
   Splash: {
@@ -18,6 +19,9 @@ const screen = {
     navigationOptions: {
       headerShown: false,
     },
+  },
+  Map: {
+    screen: map,
   },
   Start: {
     screen: tryStart,
