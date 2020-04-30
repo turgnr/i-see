@@ -11,8 +11,8 @@ export default class regularUser extends React.Component {
       mapRegion: null,
       hasLocationPermissions: false,
       locationResult: null,
-      curlet:31.626328, 
-      curlon:34.582968
+      curlet:Number = 31.626328, 
+      curlon:Number = 34.582968
     };
   }
   componentDidMount() {
@@ -32,11 +32,13 @@ export default class regularUser extends React.Component {
 
     let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
     this.setState({ locationResult: JSON.stringify(location) });
+    curlet:Number = 31.626328; 
+    curlon:Number = 34.582968;
 
     // Center the map on the location we just fetched.
    // this.setState({ mapRegion: { latitude: location.coords.latitude, longitude: location.coords.longitude, latitudeDelta: 0.015186303586663286, longitudeDelta: 0.010021738708019257 } });
     //מיקום קבוע של נקודה באשקלון בתוך אזור מסחרי עם הרבה בתי עסק
-    this.setState({ mapRegion: { latitude: this.curlet, longitude: this.curlon, latitudeDelta: 0.015186303586663286, longitudeDelta: 0.010021738708019257 } });
+    this.setState({ mapRegion: { latitude:31.626328, longitude: 34.582968, latitudeDelta: 0.015186303586663286, longitudeDelta: 0.010021738708019257 } });
   }
   render() {
     return (
@@ -46,8 +48,8 @@ export default class regularUser extends React.Component {
           region={this.state.mapRegion}
         >
           <Circle center={{
-            latitude: 31.532357,
-            longitude: 34.588387
+            latitude: 31.626328,
+            longitude: 34.582968
           }}
             radius={100}/></MapView>
       </View>
