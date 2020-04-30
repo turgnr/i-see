@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, View, Text, Dimensions, Image } from "react-native";
 import Start from "../components/start";
 
-const screenWidth = Math.round(Dimensions.get("window").width);
+const screenWidth = Math.round(Dimensions.get("screen").width);
 const screenHeight = Math.round(Dimensions.get("screen").height);
 export default class Login extends React.Component {
   constructor(props) {

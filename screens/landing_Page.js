@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Start from "../components/start";
 
-const screenWidth = Math.round(Dimensions.get("window").width);
+const screenWidth = Math.round(Dimensions.get("screen").width);
 const screenHeight = Math.round(Dimensions.get("screen").height);
 export default class Landing extends React.Component {
   constructor(props) {
@@ -65,13 +65,8 @@ const styles = StyleSheet.create({
     color: "#2A2E43",
   },
   container: {
-    position: "absolute",
     alignItems: "center",
-    top: 680,
-    left: 45,
-    width: 327,
-    height: 52,
-    justifyContent: "center",
-    flex: 1,
+    top: screenHeight - 150,
+    marginLeft: -10,
   },
 });
