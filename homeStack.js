@@ -1,17 +1,23 @@
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 import regularUser from "./components/regularUser";
-import Start from "./components/start";
 import test from "./components/test";
 import tryStart from "./components/tryStart";
 import splash from "./screens/Visually_limited_Page";
+import landing from "./screens/landing_Page";
 
 const screen = {
   Splash: {
     screen: splash,
-    //navigationOptions: {
-    //header: null,
-    //},
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  Landing: {
+    screen: landing,
+    navigationOptions: {
+      headerShown: false,
+    },
   },
   Start: {
     screen: tryStart,
