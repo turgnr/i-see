@@ -17,6 +17,7 @@ export default class Landing extends React.Component {
     this.state = {
       location: null,
     };
+    this.confingGPS();
   }
   confingGPS = () => {
     navigator.geolocation.getCurrentPosition(
