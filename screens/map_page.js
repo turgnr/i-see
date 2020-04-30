@@ -15,7 +15,6 @@ export default class Landing extends React.Component {
   constructor(props) {
     super(props);
   }
-
   render() {
     return (
       <View style={styles.mainS}>
@@ -39,13 +38,40 @@ export default class Landing extends React.Component {
         <View style={styles.barS}>
           <Text style={styles.text}>הוספת מיקום חדש</Text>
           <View style={styles.barMarge}>
-            <TouchableOpacity style={styles.buttonS}>
+            <TouchableOpacity
+              style={styles.buttonS}
+              onPress={() =>
+                this.props.navigation.navigate("Input", {
+                  type: "bus",
+                  latitude: 0,
+                  longitude: 0,
+                })
+              }
+            >
               <Image source={require("../assets/buttonBus.png")} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonS}>
+            <TouchableOpacity
+              style={styles.buttonS}
+              onPress={() =>
+                this.props.navigation.navigate("Input", {
+                  type: "res",
+                  latitude: 0,
+                  longitude: 0,
+                })
+              }
+            >
               <Image source={require("../assets/buttonRes.png")} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonS}>
+            <TouchableOpacity
+              style={styles.buttonS}
+              onPress={() =>
+                this.props.navigation.navigate("Input", {
+                  type: "oth",
+                  latitude: 0,
+                  longitude: 0,
+                })
+              }
+            >
               <Image source={require("../assets/buttonOth.png")} />
             </TouchableOpacity>
           </View>
@@ -62,7 +88,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#7A98AF",
   },
   mapS: {
-    flex: 2.2,
+    flex: 1.8,
     width: screenWidth,
     backgroundColor: "#ffff",
   },

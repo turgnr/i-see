@@ -6,6 +6,7 @@ import tryStart from "./components/tryStart";
 import splash from "./screens/Visually_limited_Page";
 import landing from "./screens/landing_Page";
 import map from "./screens/map_page";
+import input from "./screens/input_Page";
 
 const screen = {
   Splash: {
@@ -22,6 +23,9 @@ const screen = {
   },
   Map: {
     screen: map,
+  },
+  Input: {
+    screen: input,
   },
   Start: {
     screen: tryStart,

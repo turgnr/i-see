@@ -66,6 +66,6 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: "center",
-    top: screenHeight - 150,
+    marginTop: 660,
   },
 });
