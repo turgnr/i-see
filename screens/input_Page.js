@@ -92,17 +92,18 @@ const styles = StyleSheet.create({
     borderColor: "#8D8D8D",
   },
   container: {
+    fontSize: hp('5%'),
     marginLeft: 30,
     marginTop: 30,
-    height: hp("100%"), // 70% of height device screen
+    marginBottom: 50,
+    height: hp("38%"), // 70% of height device screen
     width: wp("80%"), // 80% of width device screen
     backgroundColor: "#8D8D8D",
-    borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
   },
   mapStyle: {
-    width: screenWidth - 50,
-    height: 200,
+    height: hp("38%"), 
+    width: wp("80%"), 
   },
 });
