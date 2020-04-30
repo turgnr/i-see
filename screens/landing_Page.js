@@ -26,7 +26,7 @@ export default class Landing extends React.Component {
         this.setState({ location });
         if (this.state.location != null) this.props.navigation.replace("Start");
       },
-      (error) => Alert.alert(error.message),
+      (error) => Alert.alert("נא לאשר גישת מיקום כדי להמשיך"),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
   };
@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
   imageS: {
     position: "absolute",
     top: 50,
-    left: 8,
     width: 400,
     height: 650,
   },
@@ -67,10 +66,12 @@ const styles = StyleSheet.create({
   },
   container: {
     position: "absolute",
+    alignItems: "center",
     top: 680,
-    left: 13,
+    left: 45,
     width: 327,
     height: 52,
     justifyContent: "center",
+    flex: 1,
   },
 });
