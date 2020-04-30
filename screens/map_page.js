@@ -42,7 +42,7 @@ export default class Landing extends React.Component {
               style={styles.buttonS}
               onPress={() =>
                 this.props.navigation.navigate("Input", {
-                  type: "bus",
+                  type: " תחנת אוטובוס",
                   latitude: 0,
                   longitude: 0,
                 })
@@ -54,7 +54,7 @@ export default class Landing extends React.Component {
               style={styles.buttonS}
               onPress={() =>
                 this.props.navigation.navigate("Input", {
-                  type: "res",
+                  type: " מסעדה",
                   latitude: 0,
                   longitude: 0,
                 })
@@ -66,7 +66,7 @@ export default class Landing extends React.Component {
               style={styles.buttonS}
               onPress={() =>
                 this.props.navigation.navigate("Input", {
-                  type: "oth",
+                  type: " אחר",
                   latitude: 0,
                   longitude: 0,
                 })

@@ -15,9 +15,12 @@ const screenHeight = Math.round(Dimensions.get("screen").height);
 export default class InputPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { tag: "" };
   }
   render() {
+    const { navigation } = this.props;
+    const type = navigation.getParam("type", "");
+    const latitude = navigation.getParam("latitude", "");
+    const longitude = navigation.getParam("longitude", "");
     return (
       <View style={styles.mainS}>
         <Text style={styles.text}>הוספת מיקום חדש</Text>
@@ -28,7 +31,7 @@ export default class InputPage extends React.Component {
           placeholder="  מיקום"
           editable={false}
         />
-        <TextInput style={styles.inputSA} placeholder="  סוג המיקום" />
+        <TextInput style={styles.inputSA} placeholder={type} editable={false} />
         <View style={styles.container}>
           <MapView
             provider={PROVIDER_GOOGLE}
