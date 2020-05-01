@@ -91,9 +91,10 @@ const styles = StyleSheet.create({
     width: screenWidth,
     height: screenHeight,
     backgroundColor: "#7A98AF",
+    flex: 1,
   },
   mapS: {
-    flex: 1.8,
+    flex: 4,
     width: screenWidth,
     backgroundColor: "#ffff",
   },
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 15,
     color: "#fff",
-    marginRight: 8,
+    marginLeft: 5,
   },
   container: {
     backgroundColor: "#fff",
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   mapStyle: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
+    width: "100%",
+    height: "100%",
   },
 });
