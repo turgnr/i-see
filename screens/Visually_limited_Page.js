@@ -8,7 +8,7 @@ export default class Login extends React.Component {
   constructor(props) {
     super(props);
     interval = setInterval(() => {
-      this.props.navigation.replace("Landing");
+      this.props.navigation.replace("Config");
     }, 3000);
   }
   render() {

@@ -7,10 +7,17 @@ import splash from "./screens/Visually_limited_Page";
 import landing from "./screens/landing_Page";
 import map from "./screens/map_page";
 import input from "./screens/input_Page";
+import config from "./screens/config_Page";
 
 const screen = {
   Splash: {
     screen: splash,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  Config: {
+    screen: config,
     navigationOptions: {
       headerShown: false,
     },
