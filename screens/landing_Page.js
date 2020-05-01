@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Start from "../components/start";
-
 const screenWidth = Math.round(Dimensions.get("screen").width);
 const screenHeight = Math.round(Dimensions.get("screen").height);
 export default class Landing extends React.Component {
@@ -17,7 +16,7 @@ export default class Landing extends React.Component {
     this.state = {
       location: null,
     };
-    this.confingGPS();
+    //this.confingGPS();
   }
   confingGPS = () => {
     navigator.geolocation.getCurrentPosition(
@@ -34,7 +33,7 @@ export default class Landing extends React.Component {
   render() {
     return (
       <View style={styles.mainS}>
-        <View>
+        <View style={styles.viewImageS}>
           <Image
             style={styles.imageS}
             source={require("../assets/landingGPS.png")}
@@ -52,10 +51,15 @@ export default class Landing extends React.Component {
 
 const styles = StyleSheet.create({
   imageS: {
-    position: "absolute",
-    top: 50,
-    width: 400,
-    height: 650,
+    width: "100%",
+    height: "100%",
+    marginTop: 40,
+    alignItems: "center",
+    marginLeft: -12,
+  },
+  viewImageS: {
+    flex: 2,
+    alignItems: "center",
   },
   mainS: {
     width: screenWidth,
@@ -66,7 +70,9 @@ const styles = StyleSheet.create({
     color: "#2A2E43",
   },
   container: {
+    flex: 0.4,
+
     alignItems: "center",
-    marginTop: 660,
+    marginLeft: 5,
   },
 });
