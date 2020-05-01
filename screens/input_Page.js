@@ -56,26 +56,30 @@ export default class InputPage extends React.Component {
 const styles = StyleSheet.create({
   mainS: {
     backgroundColor: "#7A98AF",
+    width: "100%",
+    height: "100%",
   },
   text: {
-    fontSize: hp("5%"),
+    marginTop: 10,
+    marginLeft: 10,
+    fontSize: 18,
     color: "#fff",
     height: hp("7%"), // 70% of height device screen
     width: wp("80%"), // 80% of width device screen
   },
   inputSN: {
     backgroundColor: "#454F63",
-    marginLeft: 40,
+    marginLeft: 20,
     marginTop: 20,
     height: hp("5%"), // 70% of height device screen
-    width: wp("80%"), // 80% of width device screen
+    width: wp("85%"), // 80% of width device screen
     borderRadius: 8,
     borderColor: "#8D8D8D",
     borderWidth: 1,
   },
   inputSA: {
     backgroundColor: "#FFFFFF",
-    marginLeft: 32,
+    marginLeft: 28,
     marginTop: 15,
     height: hp("5%"), // 70% of height device screen
     width: wp("80%"), // 80% of width device screen
@@ -83,27 +87,18 @@ const styles = StyleSheet.create({
     borderColor: "#8D8D8D",
     borderWidth: 1,
   },
-  pikerS: {
-    backgroundColor: "#FFFFFF",
-    marginLeft: 32,
-    marginTop: 15,
-    height: hp("5%"), // 70% of height device screen
-    width: wp("5%"), // 80% of width device screen
-    borderColor: "#8D8D8D",
-  },
   container: {
-    fontSize: hp('5%'),
-    marginLeft: 30,
-    marginTop: 30,
+    marginLeft: 20,
+    marginTop: 20,
     marginBottom: 50,
-    height: hp("38%"), // 70% of height device screen
-    width: wp("80%"), // 80% of width device screen
+    height: hp("30%"), // 70% of height device screen
+    width: wp("85%"), // 80% of width device screen
     backgroundColor: "#8D8D8D",
     alignItems: "center",
     justifyContent: "center",
   },
   mapStyle: {
-    height: hp("38%"), 
-    width: wp("80%"), 
+    height: "100%",
+    width: "100%",
   },
 });
