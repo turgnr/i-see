@@ -23,8 +23,8 @@ export default class InputPage extends React.Component {
   render() {
     const { navigation } = this.props;
     const type = navigation.getParam("type", "");
-    const latitude = navigation.getParam("latitude", "");
-    const longitude = navigation.getParam("longitude", "");
+    const latitudeGps = navigation.getParam("latitude", "");
+    const longitudeGps = navigation.getParam("longitude", "");
     return (
       <View style={styles.mainS}>
         <Text style={styles.text}>הוספת מיקום חדש</Text>
@@ -32,7 +32,7 @@ export default class InputPage extends React.Component {
         <TextInput style={styles.inputSA} placeholder="  תיאור המקום" />
         <TextInput
           style={styles.inputSA}
-          placeholder="  מיקום"
+          placeholder={latitudeGps + " , " + longitudeGps}
           editable={false}
         />
         <TextInput style={styles.inputSA} placeholder={type} editable={false} />
@@ -41,8 +41,8 @@ export default class InputPage extends React.Component {
             provider={PROVIDER_GOOGLE}
             style={styles.mapStyle}
             region={{
-              latitude: 31.626328,
-              longitude: 34.582968,
+              latitude: latitudeGps,
+              longitude: longitudeGps,
               latitudeDelta: 0.015186303586663286,
               longitudeDelta: 0.010021738708019257,
             }}
@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     marginLeft: 28,
     marginTop: 15,
+    textAlign: "right",
     height: hp("5%"), // 70% of height device screen
     width: wp("80%"), // 80% of width device screen
     borderRadius: 8,

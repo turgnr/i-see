@@ -7,7 +7,6 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import Start from "../components/start";
 const screenWidth = Math.round(Dimensions.get("screen").width);
 const screenHeight = Math.round(Dimensions.get("screen").height);
 export default class Landing extends React.Component {
@@ -22,9 +21,12 @@ export default class Landing extends React.Component {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const location = JSON.stringify(position);
-
         this.setState({ location });
-        if (this.state.location != null) this.props.navigation.replace("Map");
+        if (this.state.location != null)
+          this.props.navigation.navigate("Map", {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
       },
       (error) => Alert.alert("נא לאשר גישת מיקום כדי להמשיך"),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }

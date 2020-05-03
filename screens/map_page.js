@@ -16,6 +16,9 @@ export default class Landing extends React.Component {
     super(props);
   }
   render() {
+    const { navigation } = this.props;
+    const latitudeGps = navigation.getParam("latitude", "");
+    const longitudeGps = navigation.getParam("longitude", "");
     return (
       <View style={styles.mainS}>
         <View style={styles.mapS}>
@@ -24,16 +27,16 @@ export default class Landing extends React.Component {
               provider={PROVIDER_GOOGLE}
               style={styles.mapStyle}
               region={{
-                latitude: 31.626328,
-                longitude: 34.582968,
+                latitude: latitudeGps,
+                longitude: longitudeGps,
                 latitudeDelta: 0.015186303586663286,
                 longitudeDelta: 0.010021738708019257,
               }}
             >
               <Circle
                 center={{
-                  latitude: 31.626328,
-                  longitude: 34.582968,
+                  latitude: latitudeGps,
+                  longitude: longitudeGps,
                 }}
                 radius={100}
               />
@@ -48,8 +51,8 @@ export default class Landing extends React.Component {
               onPress={() =>
                 this.props.navigation.navigate("Input", {
                   type: " תחנת אוטובוס",
-                  latitude: 0,
-                  longitude: 0,
+                  latitude: latitudeGps,
+                  longitude: longitudeGps,
                 })
               }
             >
@@ -60,8 +63,8 @@ export default class Landing extends React.Component {
               onPress={() =>
                 this.props.navigation.navigate("Input", {
                   type: " מסעדה",
-                  latitude: 0,
-                  longitude: 0,
+                  latitude: latitudeGps,
+                  longitude: longitudeGps,
                 })
               }
             >
@@ -72,8 +75,8 @@ export default class Landing extends React.Component {
               onPress={() =>
                 this.props.navigation.navigate("Input", {
                   type: " אחר",
-                  latitude: 0,
-                  longitude: 0,
+                  latitude: latitudeGps,
+                  longitude: longitudeGps,
                 })
               }
             >
