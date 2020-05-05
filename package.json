@@ -12,7 +12,7 @@
     "body-parser": "^1.19.0",
     "expo": "^37.0.3",
     "expo-av": "~8.1.0",
-    "expo-cli": "^3.18.2",
+    "expo-cli": "3.20.1",
     "express": "^4.17.1",
     "link": "^0.1.5",
     "mongodb": "^3.5.7",
