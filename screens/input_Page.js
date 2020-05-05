@@ -7,6 +7,7 @@ import {
   Item,
   TextInput,
   Picker,
+  Button,
 } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -19,17 +20,34 @@ const screenHeight = Math.round(Dimensions.get("screen").height);
 export default class InputPage extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      name: null,
+      description: null,
+      latitudeGps: null,
+      longitudeGp: null,
+      type: null,
+    };
   }
   render() {
     const { navigation } = this.props;
-    const type = navigation.getParam("type", "");
-    const latitudeGps = navigation.getParam("latitude", "");
-    const longitudeGps = navigation.getParam("longitude", "");
+    var type = navigation.getParam("type", "");
+    var latitudeGps = navigation.getParam("latitude", "");
+    var longitudeGps = navigation.getParam("longitude", "");
+    var name = "";
+    var description = "";
     return (
       <View style={styles.mainS}>
         <Text style={styles.text}>הוספת מיקום חדש</Text>
-        <TextInput style={styles.inputSN} placeholder="  שם המקום" />
-        <TextInput style={styles.inputSA} placeholder="  תיאור המקום" />
+        <TextInput
+          style={styles.inputSN}
+          placeholder="  שם המקום"
+          onChangeText={(text) => (name = { text })}
+        />
+        <TextInput
+          style={styles.inputSA}
+          placeholder="  תיאור המקום"
+          onChangeText={(text) => (description = { text })}
+        />
         <TextInput
           style={styles.inputSA}
           placeholder={latitudeGps + " , " + longitudeGps}
@@ -43,11 +61,12 @@ export default class InputPage extends React.Component {
             region={{
               latitude: latitudeGps,
               longitude: longitudeGps,
-              latitudeDelta: 0.015186303586663286,
-              longitudeDelta: 0.010021738708019257,
+              latitudeDelta: 0.0016303586663286,
+              longitudeDelta: 0.001121738708019257,
             }}
           ></MapView>
         </View>
+        <Button title="שלח"></Button>
       </View>
     );
   }
@@ -103,9 +122,3 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
-
-
-
-
-
-

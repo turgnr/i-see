@@ -29,8 +29,8 @@ export default class Landing extends React.Component {
               region={{
                 latitude: latitudeGps,
                 longitude: longitudeGps,
-                latitudeDelta: 0.015186303586663286,
-                longitudeDelta: 0.010021738708019257,
+                latitudeDelta: 0.0016303586663286,
+                longitudeDelta: 0.002121738708019257,
               }}
             >
               <Circle
