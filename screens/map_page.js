@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, Component } from "react";
 import {
   StyleSheet,
   View,
@@ -8,17 +8,28 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
-import MapView, { Circle, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker, Circle, PROVIDER_GOOGLE } from "react-native-maps";
+
 const screenWidth = Math.round(Dimensions.get("window").width);
 const screenHeight = Math.round(Dimensions.get("screen").height);
-export default class Landing extends React.Component {
+
+export default class mapP extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      loading: true,
+      region: {
+        latitude: this.props.navigation.getParam("latitude"),
+        longitude: this.props.navigation.getParam("longitude"),
+        latitudeDelta: 0.0016303586663286,
+        longitudeDelta: 0.00212738708019257,
+      },
+    };
   }
+  onRegionChange = (region) => {
+    this.setState({ region: region });
+  };
   render() {
-    const { navigation } = this.props;
-    const latitudeGps = navigation.getParam("latitude", "");
-    const longitudeGps = navigation.getParam("longitude", "");
     return (
       <View style={styles.mainS}>
         <View style={styles.mapS}>
@@ -26,19 +37,23 @@ export default class Landing extends React.Component {
             <MapView
               provider={PROVIDER_GOOGLE}
               style={styles.mapStyle}
-              region={{
-                latitude: latitudeGps,
-                longitude: longitudeGps,
-                latitudeDelta: 0.0016303586663286,
-                longitudeDelta: 0.002121738708019257,
-              }}
+              region={this.state.region}
+              onRegionChangeComplete={this.onRegionChange}
             >
               <Circle
                 center={{
-                  latitude: latitudeGps,
-                  longitude: longitudeGps,
+                  latitude: this.state.region.latitude,
+                  longitude: this.state.region.longitude,
                 }}
                 radius={100}
+              />
+              <Marker
+                coordinate={{
+                  latitude: this.state.region.latitude,
+                  longitude: this.state.region.longitude,
+                }}
+                title={"Your Location"}
+                draggable
               />
             </MapView>
           </View>
@@ -51,8 +66,8 @@ export default class Landing extends React.Component {
               onPress={() =>
                 this.props.navigation.navigate("Input", {
                   type: " תחנת אוטובוס",
-                  latitude: latitudeGps,
-                  longitude: longitudeGps,
+                  latitude: this.state.region.latitude,
+                  longitude: this.state.region.longitude,
                 })
               }
             >
@@ -63,8 +78,8 @@ export default class Landing extends React.Component {
               onPress={() =>
                 this.props.navigation.navigate("Input", {
                   type: " מסעדה",
-                  latitude: latitudeGps,
-                  longitude: longitudeGps,
+                  latitude: this.state.region.latitude,
+                  longitude: this.state.region.longitude,
                 })
               }
             >
@@ -75,8 +90,8 @@ export default class Landing extends React.Component {
               onPress={() =>
                 this.props.navigation.navigate("Input", {
                   type: " אחר",
-                  latitude: latitudeGps,
-                  longitude: longitudeGps,
+                  latitude: this.state.region.latitude,
+                  longitude: this.state.region.longitude,
                 })
               }
             >
