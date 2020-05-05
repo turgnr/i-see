@@ -12,7 +12,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import MapView, { Circle, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker, Circle, PROVIDER_GOOGLE } from "react-native-maps";
 const screenWidth = Math.round(Dimensions.get("screen").width);
 const screenHeight = Math.round(Dimensions.get("screen").height);
 
@@ -45,8 +45,20 @@ export default class InputPage extends React.Component {
               longitude: longitudeGps,
               latitudeDelta: 0.0016303586663286,
               longitudeDelta: 0.001121738708019257,
+
             }}
-          ></MapView>
+            zoomEnabled={false}
+            rotateEnabled={false}
+            scrollEnabled={false}
+          >
+            <Marker
+              title="i-see location"
+              coordinate={{
+                "latitude": navigation.getParam("latitude", ""),
+                "longitude": navigation.getParam("longitude", "")
+              }}
+              draggable />
+          </MapView>
         </View>
       </View>
     );
