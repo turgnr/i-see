@@ -10,10 +10,8 @@ import {
 } from "react-native";
 import MapView, { Marker, Circle, PROVIDER_GOOGLE } from "react-native-maps";
 
-
 const screenWidth = Math.round(Dimensions.get("window").width);
 const screenHeight = Math.round(Dimensions.get("screen").height);
-
 
 export default class mapP extends React.Component {
   constructor(props) {
@@ -24,17 +22,21 @@ export default class mapP extends React.Component {
         latitude: this.props.navigation.getParam("latitude"),
         longitude: this.props.navigation.getParam("longitude"),
         latitudeDelta: 0.0016303586663286,
-        longitudeDelta: 0.00212738708019257
-      }
+        longitudeDelta: 0.00212738708019257,
+      },
     };
   }
 
   onRegionChange = (region) => {
+<<<<<<< HEAD
    this.setState({region:region});
   }
   
+=======
+    this.setState({ region: region });
+  };
+>>>>>>> 80430a679c701b35c597586c9cc3738415df16c5
   render() {
-
     return (
       <View style={styles.mainS}>
         <View style={styles.mapS}>
@@ -54,11 +56,17 @@ export default class mapP extends React.Component {
               />
               <Marker
                 coordinate={{
-                  "latitude": this.state.region.latitude,
-                  "longitude": this.state.region.longitude
+                  latitude: this.state.region.latitude,
+                  longitude: this.state.region.longitude,
                 }}
+<<<<<<< HEAD
                 title={"i-see location"}
                 draggable />
+=======
+                title={"Your Location"}
+                draggable
+              />
+>>>>>>> 80430a679c701b35c597586c9cc3738415df16c5
             </MapView>
           </View>
         </View>
@@ -83,7 +91,7 @@ export default class mapP extends React.Component {
                 this.props.navigation.navigate("Input", {
                   type: " מסעדה",
                   latitude: this.state.region.latitude,
-                  longitude: this.state.region.longitude
+                  longitude: this.state.region.longitude,
                 })
               }
             >
@@ -95,7 +103,7 @@ export default class mapP extends React.Component {
                 this.props.navigation.navigate("Input", {
                   type: " אחר",
                   latitude: this.state.region.latitude,
-                  longitude: this.state.region.longitude
+                  longitude: this.state.region.longitude,
                 })
               }
             >

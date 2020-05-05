@@ -6,7 +6,11 @@ import {
   Dimensions,
   Item,
   TextInput,
+<<<<<<< HEAD
   TouchableOpacity,
+=======
+  Picker,
+>>>>>>> 80430a679c701b35c597586c9cc3738415df16c5
   Button,
 } from "react-native";
 import {
@@ -20,28 +24,35 @@ const screenHeight = Math.round(Dimensions.get("screen").height);
 export default class InputPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state={
-      latitude:this.props.navigation.getParam("latitude", ""),
-      longitude:this.props.navigation.getParam("longitude", ""),
-
-    }
-  }
-
-  sendObjToDB = (e) => {
-    alert("UPDATE DB!!");
-    console.log(e);
+    this.state = {
+      name: null,
+      description: null,
+      latitudeGps: null,
+      longitudeGp: null,
+      type: null,
+    };
   }
 
   render() {
     const { navigation } = this.props;
-    const type = navigation.getParam("type", "");
-    let latitudeGps = navigation.getParam("latitude", "");
-    let longitudeGps = navigation.getParam("longitude", "");
+    var type = navigation.getParam("type", "");
+    var latitudeGps = navigation.getParam("latitude", "");
+    var longitudeGps = navigation.getParam("longitude", "");
+    var name = "";
+    var description = "";
     return (
       <View style={styles.mainS}>
         <Text style={styles.text}>הוספת מיקום חדש</Text>
-        <TextInput style={styles.inputSN} placeholder="  שם המקום" />
-        <TextInput style={styles.inputSA} placeholder="  תיאור המקום" />
+        <TextInput
+          style={styles.inputSN}
+          placeholder="  שם המקום"
+          onChangeText={(text) => (name = { text })}
+        />
+        <TextInput
+          style={styles.inputSA}
+          placeholder="  תיאור המקום"
+          onChangeText={(text) => (description = { text })}
+        />
         <TextInput
           style={styles.inputSA}
           placeholder={latitudeGps + " , " + longitudeGps}
@@ -57,7 +68,6 @@ export default class InputPage extends React.Component {
               longitude: longitudeGps,
               latitudeDelta: 0.0016303586663286,
               longitudeDelta: 0.001121738708019257,
-
             }}
             zoomEnabled={false}
             rotateEnabled={false}
@@ -66,18 +76,14 @@ export default class InputPage extends React.Component {
             <Marker
               title="i-see location"
               coordinate={{
-                "latitude": navigation.getParam("latitude", ""),
-                "longitude": navigation.getParam("longitude", "")
+                latitude: navigation.getParam("latitude", ""),
+                longitude: navigation.getParam("longitude", ""),
               }}
-              draggable />
+              draggable
+            />
           </MapView>
         </View>
-        <TouchableOpacity
-          style={styles.buttonS}
-          accessibilityRole = 'button'
-          onPress={this.sendObjToDB(this.state)}
-        ><Text style={styles.textInButton}>הוסף מיקום</Text>
-        </TouchableOpacity>
+        <Button title="שלח"></Button>
       </View>
     );
   }
@@ -141,9 +147,3 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
-
-
-
-
-
-
