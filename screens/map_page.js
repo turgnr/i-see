@@ -14,7 +14,16 @@ const screenHeight = Math.round(Dimensions.get("screen").height);
 export default class Landing extends React.Component {
   constructor(props) {
     super(props);
-  }
+    this.state = {
+      loading: true,
+      region: {
+      latitude: this.props.navigation.getParam("latitude"),
+      longitude: this.props.navigation.getParam("longitude"),
+      latitudeDelta: 0.0016303586663286,
+      longitudeDelta: 0.00212738708019257
+    }
+  };
+}
   render() {
     const { navigation } = this.props;
     const latitudeGps = navigation.getParam("latitude", "");
@@ -26,12 +35,9 @@ export default class Landing extends React.Component {
             <MapView
               provider={PROVIDER_GOOGLE}
               style={styles.mapStyle}
-              region={{
-                latitude: latitudeGps,
-                longitude: longitudeGps,
-                latitudeDelta: 0.015186303586663286,
-                longitudeDelta: 0.010021738708019257,
-              }}
+              region={this.state.region}
+              
+              onRegionChangeComplete={this.onRegionChange}
             >
               <Circle
                 center={{
@@ -40,6 +46,13 @@ export default class Landing extends React.Component {
                 }}
                 radius={100}
               />
+              <MapView.Marker
+                coordinate={{
+                  "latitude": this.state.region.latitude,
+                  "longitude": this.state.region.longitude
+                }}
+                title={"Your Location"}
+                draggable />
             </MapView>
           </View>
         </View>

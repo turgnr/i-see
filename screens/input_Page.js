@@ -23,8 +23,8 @@ export default class InputPage extends React.Component {
   render() {
     const { navigation } = this.props;
     const type = navigation.getParam("type", "");
-    const latitudeGps = navigation.getParam("latitude", "");
-    const longitudeGps = navigation.getParam("longitude", "");
+    let latitudeGps = navigation.getParam("latitude", "");
+    let longitudeGps = navigation.getParam("longitude", "");
     return (
       <View style={styles.mainS}>
         <Text style={styles.text}>הוספת מיקום חדש</Text>
@@ -43,8 +43,8 @@ export default class InputPage extends React.Component {
             region={{
               latitude: latitudeGps,
               longitude: longitudeGps,
-              latitudeDelta: 0.015186303586663286,
-              longitudeDelta: 0.010021738708019257,
+              latitudeDelta: 0.0016303586663286,
+              longitudeDelta: 0.001121738708019257,
             }}
           ></MapView>
         </View>
