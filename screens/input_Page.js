@@ -6,7 +6,8 @@ import {
   Dimensions,
   Item,
   TextInput,
-  Picker,
+  TouchableOpacity,
+  Button,
 } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -19,7 +20,18 @@ const screenHeight = Math.round(Dimensions.get("screen").height);
 export default class InputPage extends React.Component {
   constructor(props) {
     super(props);
+    this.state={
+      latitude:this.props.navigation.getParam("latitude", ""),
+      longitude:this.props.navigation.getParam("longitude", ""),
+
+    }
   }
+
+  sendObjToDB = (e) => {
+    alert("UPDATE DB!!");
+    console.log(e);
+  }
+
   render() {
     const { navigation } = this.props;
     const type = navigation.getParam("type", "");
@@ -60,6 +72,12 @@ export default class InputPage extends React.Component {
               draggable />
           </MapView>
         </View>
+        <TouchableOpacity
+          style={styles.buttonS}
+          accessibilityRole = 'button'
+          onPress={this.sendObjToDB(this.state)}
+        ><Text style={styles.textInButton}>הוסף מיקום</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -78,6 +96,14 @@ const styles = StyleSheet.create({
     color: "#fff",
     height: hp("7%"), // 70% of height device screen
     width: wp("80%"), // 80% of width device screen
+  },
+  buttonS: {
+    backgroundColor: "skyblue",
+    width: "100%",
+    height: "100%"
+  },
+  textInButton: {
+    textAlign: "center"
   },
   inputSN: {
     backgroundColor: "#454F63",

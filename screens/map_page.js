@@ -27,11 +27,12 @@ export default class mapP extends React.Component {
         longitudeDelta: 0.00212738708019257
       }
     };
-
   }
+
   onRegionChange = (region) => {
    this.setState({region:region});
   }
+  
   render() {
 
     return (
@@ -56,7 +57,7 @@ export default class mapP extends React.Component {
                   "latitude": this.state.region.latitude,
                   "longitude": this.state.region.longitude
                 }}
-                title={"Your Location"}
+                title={"i-see location"}
                 draggable />
             </MapView>
           </View>
