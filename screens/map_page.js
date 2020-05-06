@@ -40,13 +40,6 @@ export default class mapP extends React.Component {
               region={this.state.region}
               onRegionChangeComplete={this.onRegionChange}
             >
-              <Circle
-                center={{
-                  latitude: this.state.region.latitude,
-                  longitude: this.state.region.longitude,
-                }}
-                radius={100}
-              />
               <Marker
                 coordinate={{
                   latitude: this.state.region.latitude,
@@ -145,3 +138,11 @@ const styles = StyleSheet.create({
     height: "100%",
   },
 });
+
+/*<Circle
+    center={{
+      latitude: this.state.region.latitude,
+     longitude: this.state.region.longitude,
+    }}
+    radius={100}
+  /> */

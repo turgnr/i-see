@@ -12,6 +12,7 @@ export default class Server extends React.Component {
     this.connetMongoDB = this.connetMongoDB.bind(this);
     this.connetServerAnon = this.connetServerAnon.bind(this);
     this.displayLocaion = this.displayLocaion.bind(this);
+    this.setLocaion = this.setLocaion.bind(this);
     this.connetMongoDB();
   }
   async connetMongoDB() {
@@ -41,5 +42,19 @@ export default class Server extends React.Component {
       .then((locations) => {
         console.log(locations);
       });
+  }
+
+  setLocaion(Name, X, Y, Des, Type) {
+    this.db
+      .collection("locations")
+      .insertOne({
+        owner_id: this.client.auth.user.id,
+        name: Name,
+        x: X,
+        y: Y,
+        description: Des,
+        type: Type,
+      })
+      .catch(console.error);
   }
 }

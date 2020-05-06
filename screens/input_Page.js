@@ -34,11 +34,11 @@ export default class InputPage extends React.Component {
   }
   render() {
     const { navigation } = this.props;
-    var type = navigation.getParam("type", "");
-    var latitudeGps = navigation.getParam("latitude", "");
-    var longitudeGps = navigation.getParam("longitude", "");
-    var name = "";
-    var description = "";
+    let type = navigation.getParam("type", "");
+    let latitudeGps = navigation.getParam("latitude", "");
+    let longitudeGps = navigation.getParam("longitude", "");
+    let name = "";
+    let description = "";
     return (
       <View style={styles.mainS}>
         <Text style={styles.text}>הוספת מיקום חדש</Text>
@@ -83,7 +83,15 @@ export default class InputPage extends React.Component {
           </MapView>
         </View>
         <Button
-          onPress={() => server.connetServerAnon()}
+          onPress={() =>
+            server.setLocaion(
+              name.text,
+              latitudeGps,
+              longitudeGps,
+              description.text,
+              type
+            )
+          }
           title="שלח"
           Color="#454F63"
         ></Button>
@@ -142,3 +150,5 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
+
+//() => this.props.navigation.goBack(null)) //go back to priv page
