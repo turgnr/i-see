@@ -14,8 +14,12 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import MapView, { Marker, Circle, PROVIDER_GOOGLE } from "react-native-maps";
+import Server from "../mongoDbServer";
+
 const screenWidth = Math.round(Dimensions.get("screen").width);
 const screenHeight = Math.round(Dimensions.get("screen").height);
+
+const server = new Server(); //run server connect mongoDB
 
 export default class InputPage extends React.Component {
   constructor(props) {
@@ -78,7 +82,11 @@ export default class InputPage extends React.Component {
             />
           </MapView>
         </View>
-        <Button title="שלח"></Button>
+        <Button
+          onPress={() => server.connetServerAnon()}
+          title="שלח"
+          Color="#454F63"
+        ></Button>
       </View>
     );
   }

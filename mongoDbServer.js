@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import { Text, View } from "react-native";
+import React from "react";
 
 import {
   Stitch,
@@ -10,15 +9,13 @@ import {
 export default class Server extends React.Component {
   constructor() {
     super();
-    this.state = {
-      locations: [],
-    };
-    this.run = this.run.bind(this);
-    this.displayTodos = this.displayTodos.bind(this);
-    this.run();
+    this.connetMongoDB = this.connetMongoDB.bind(this);
+    this.connetServerAnon = this.connetServerAnon.bind(this);
+    this.displayLocaion = this.displayLocaion.bind(this);
+    this.connetMongoDB();
   }
-  async run() {
-    // Initialize the App Client
+  async connetMongoDB() {
+    //connect to mongoDB database
     this.client = await Stitch.initializeAppClient("i-see-upewz");
     const mongodb = this.client.getServiceClient(
       RemoteMongoClient.factory,
@@ -26,41 +23,23 @@ export default class Server extends React.Component {
     );
     console.log("connect");
     this.db = mongodb.db("LOCATION");
-    this.displayTodosOnLoad();
   }
-  displayTodosOnLoad() {
-    // Anonymously log in and display comments on load
+
+  connetServerAnon() {
     this.client.auth
       .loginWithCredential(new AnonymousCredential())
-      .then(this.displayTodos)
+      .then(() => this.displayLocaion())
       .catch(console.error);
   }
 
-  displayTodos() {
-    // query the remote DB and update the component state
+  displayLocaion() {
+    //read all items from collection in monogoDB
     this.db
       .collection("locations")
-      .find({}, { limit: 10 })
+      .find({}, { limit: 100 })
       .asArray()
       .then((locations) => {
-        this.setState({ locations });
         console.log(locations);
       });
-  }
-
-  displayTodosOnLoad() {
-    // Anonymously log in and display comments on load
-    this.client.auth
-      .loginWithCredential(new AnonymousCredential())
-      .then(this.displayTodos)
-      .catch(console.error);
-  }
-
-  render() {
-    return (
-      <View>
-        <Text>OK</Text>
-      </View>
-    );
   }
 }

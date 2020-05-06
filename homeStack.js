@@ -8,13 +8,8 @@ import landing from "./screens/landing_Page";
 import map from "./screens/map_page";
 import input from "./screens/input_Page";
 import config from "./screens/config_Page";
-import server from "./mongoDbServer";
 
 const screen = {
-  Server: {
-    ///test for build server
-    screen: server,
-  },
   Splash: {
     screen: splash,
     navigationOptions: {
