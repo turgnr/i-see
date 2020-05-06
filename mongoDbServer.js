@@ -11,17 +11,15 @@ export default class Server extends React.Component {
   constructor() {
     super();
     this.state = {
-      name: "",
-      x: "",
-      y: "",
-      description: "",
+      locations: [],
     };
     this.run = this.run.bind(this);
     this.displayTodos = this.displayTodos.bind(this);
+    this.run();
   }
   async run() {
     // Initialize the App Client
-    this.client = await Stitch.initializeDefaultAppClient("i-see-upewz");
+    this.client = await Stitch.initializeAppClient("i-see-upewz");
     const mongodb = this.client.getServiceClient(
       RemoteMongoClient.factory,
       "mongodb-atlas"
@@ -44,9 +42,9 @@ export default class Server extends React.Component {
       .collection("locations")
       .find({}, { limit: 10 })
       .asArray()
-      .then((name) => {
-        this.setState({ name });
-        console.log(name);
+      .then((locations) => {
+        this.setState({ locations });
+        console.log(locations);
       });
   }
 
@@ -59,7 +57,6 @@ export default class Server extends React.Component {
   }
 
   render() {
-    this.run();
     return (
       <View>
         <Text>OK</Text>
