@@ -7,32 +7,29 @@ import {
   ImageBackground,
   Image,
 } from "react-native";
-
+import { Audio } from 'expo-av';
 const screenWidth = Math.round(Dimensions.get("screen").width);
 const screenHeight = Math.round(Dimensions.get("screen").height);
 
 export default class ConfigP extends React.Component {
   constructor(props) {
     super(props);
-    start();
+    this.activeSound = this.activeSound.bind(this);
+    
+    moveToUnregular = setTimeout(() => {
+    this.props.navigation.replace("Test");}, 8000);
+    this.activeSound();
   }
 
-  start = async () => {
-    const soundObject = new Audio.Sound();
+  
+
+  async activeSound() {
+    this.soundObject = new Audio.Sound();
     try {
       let source = require("../assets/start.m4a");
-      await soundObject.loadAsync(source);
-      await soundObject
-        .playAsync()
-        .then(async (playbackStatus) => {
-          setTimeout(() => {
-            soundObject.unloadAsync();
-          }, playbackStatus.playableDurationMillis);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch (error) {}
+      await this.soundObject.loadAsync(source);
+      await this.soundObject.playAsync();          
+    } catch (error) { }
   };
 
   render() {
@@ -43,7 +40,10 @@ export default class ConfigP extends React.Component {
           style={styles.image}
         >
           <TouchableOpacity
-            onPress={() => this.props.navigation.replace("Landing")}
+            onPress={() => {
+              this.soundObject.stopAsync();
+              this.props.navigation.replace("Landing");
+            }}
           >
             <Image
               source={require("../assets/ok_button.png")}
