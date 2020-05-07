@@ -32,7 +32,6 @@ export default class Server extends React.Component {
       .then(() => this.displayLocaion())
       .catch(console.error);
   }
-
   displayLocaion() {
     //read all items from collection in monogoDB
     this.db

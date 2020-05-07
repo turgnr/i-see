@@ -1,8 +1,6 @@
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
-import regularUser from "./components/regularUser";
-import test from "./components/test";
-import tryStart from "./components/tryStart";
+import VLlimitedPage from "./screens/VLlimited_page";
 import splash from "./screens/Visually_limited_Page";
 import landing from "./screens/landing_Page";
 import map from "./screens/map_page";
@@ -34,14 +32,11 @@ const screen = {
   Input: {
     screen: input,
   },
-  Start: {
-    screen: tryStart,
-  },
-  HomeRU: {
-    screen: regularUser,
-  },
-  Test: {
-    screen: test,
+  VLlimitedPage: {
+    screen: VLlimitedPage,
+    navigationOptions: {
+      headerShown: false,
+    },
   },
 };
 

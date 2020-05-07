@@ -17,7 +17,7 @@ export default class ConfigP extends React.Component {
     this.activeSound = this.activeSound.bind(this);
     
     moveToUnregular = setTimeout(() => {
-    this.props.navigation.replace("Test");}, 8000);
+    this.props.navigation.replace("VLlimitedPage");}, 8000);
     this.activeSound();
   }
 
@@ -26,7 +26,7 @@ export default class ConfigP extends React.Component {
   async activeSound() {
     this.soundObject = new Audio.Sound();
     try {
-      let source = require("../assets/start.m4a");
+      let source = require("../assets/Welcom.m4a");
       await this.soundObject.loadAsync(source);
       await this.soundObject.playAsync();          
     } catch (error) { }
