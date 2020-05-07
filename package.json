@@ -15,6 +15,7 @@
     "expo-cli": "3.20.1",
     "express": "^4.17.1",
     "link": "^0.1.5",
+    "mathjs": "^7.0.0",
     "mongodb": "^3.5.7",
     "mongodb-stitch-browser-sdk": "^4.8.0",
     "mongodb-stitch-react-native-sdk": "^4.8.0",
