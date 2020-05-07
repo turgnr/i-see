@@ -14,8 +14,12 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import Server from "../mongoDbServer";
+
 const screenWidth = Math.round(Dimensions.get("screen").width);
 const screenHeight = Math.round(Dimensions.get("screen").height);
+
+const server = new Server(); //run server connect mongoDB
 
 export default class InputPage extends React.Component {
   constructor(props) {
@@ -30,6 +34,12 @@ export default class InputPage extends React.Component {
   }
 
   render() {
+    const { navigation } = this.props;
+    let type = navigation.getParam("type", "");
+    let latitudeGps = navigation.getParam("latitude", "");
+    let longitudeGps = navigation.getParam("longitude", "");
+    let name = "";
+    let description = "";
     return (
       <View style={styles.mainS}>
         <Text style={styles.text}>הוספת מיקום חדש</Text>
@@ -73,7 +83,19 @@ export default class InputPage extends React.Component {
             />
           </MapView>
         </View>
-        <Button title="שלח"></Button>
+        <Button
+          onPress={() =>
+            server.setLocaion(
+              name.text,
+              latitudeGps,
+              longitudeGps,
+              description.text,
+              type
+            )
+          }
+          title="שלח"
+          Color="#454F63"
+        ></Button>
       </View>
     );
   }
@@ -137,3 +159,5 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
+
+//() => this.props.navigation.goBack(null)) //go back to priv page

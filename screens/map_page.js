@@ -140,3 +140,11 @@ const styles = StyleSheet.create({
     height: "100%",
   },
 });
+
+/*<Circle
+    center={{
+      latitude: this.state.region.latitude,
+     longitude: this.state.region.longitude,
+    }}
+    radius={100}
+  /> */
