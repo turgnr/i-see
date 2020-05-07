@@ -6,18 +6,14 @@ import {
   Dimensions,
   Item,
   TextInput,
-<<<<<<< HEAD
   TouchableOpacity,
-=======
-  Picker,
->>>>>>> 80430a679c701b35c597586c9cc3738415df16c5
   Button,
 } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import MapView, { Marker, Circle, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 const screenWidth = Math.round(Dimensions.get("screen").width);
 const screenHeight = Math.round(Dimensions.get("screen").height);
 
@@ -27,45 +23,39 @@ export default class InputPage extends React.Component {
     this.state = {
       name: null,
       description: null,
-      latitudeGps: null,
-      longitudeGp: null,
-      type: null,
+      latitudeGps: this.props.navigation.getParam("latitude", ""),
+      longitudeGps: this.props.navigation.getParam("longitude", ""),
+      type: this.props.navigation.getParam("type", "")
     };
   }
 
   render() {
-    const { navigation } = this.props;
-    var type = navigation.getParam("type", "");
-    var latitudeGps = navigation.getParam("latitude", "");
-    var longitudeGps = navigation.getParam("longitude", "");
-    var name = "";
-    var description = "";
     return (
       <View style={styles.mainS}>
         <Text style={styles.text}>הוספת מיקום חדש</Text>
         <TextInput
           style={styles.inputSN}
           placeholder="  שם המקום"
-          onChangeText={(text) => (name = { text })}
+          onChangeText={(text) => (this.state.name = { text })}
         />
         <TextInput
           style={styles.inputSA}
           placeholder="  תיאור המקום"
-          onChangeText={(text) => (description = { text })}
+          onChangeText={(text) => (this.state.description = { text })}
         />
         <TextInput
           style={styles.inputSA}
-          placeholder={latitudeGps + " , " + longitudeGps}
+          placeholder={this.state.latitudeGps + " , " + this.state.longitudeGps}
           editable={false}
         />
-        <TextInput style={styles.inputSA} placeholder={type} editable={false} />
+        <TextInput style={styles.inputSA} placeholder={this.state.type} editable={false} />
         <View style={styles.container}>
           <MapView
             provider={PROVIDER_GOOGLE}
             style={styles.mapStyle}
             region={{
-              latitude: latitudeGps,
-              longitude: longitudeGps,
+              latitude: this.state.latitudeGps,
+              longitude: this.state.longitudeGps,
               latitudeDelta: 0.0016303586663286,
               longitudeDelta: 0.001121738708019257,
             }}
@@ -76,8 +66,8 @@ export default class InputPage extends React.Component {
             <Marker
               title="i-see location"
               coordinate={{
-                latitude: navigation.getParam("latitude", ""),
-                longitude: navigation.getParam("longitude", ""),
+                latitude: this.state.latitudeGps,
+                longitude: this.state.longitudeGps,
               }}
               draggable
             />

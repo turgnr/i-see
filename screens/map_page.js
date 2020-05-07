@@ -8,7 +8,7 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
-import MapView, { Marker, Circle, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 
 const screenWidth = Math.round(Dimensions.get("window").width);
 const screenHeight = Math.round(Dimensions.get("screen").height);
@@ -28,9 +28,9 @@ export default class mapP extends React.Component {
   }
 
   onRegionChange = (region) => {
-   this.setState({region:region});
+    this.setState({ region: region });
   }
-  
+
   render() {
     return (
       <View style={styles.mainS}>
@@ -42,20 +42,14 @@ export default class mapP extends React.Component {
               region={this.state.region}
               onRegionChangeComplete={this.onRegionChange}
             >
-              <Circle
-                center={{
-                  latitude: this.state.region.latitude,
-                  longitude: this.state.region.longitude,
-                }}
-                radius={100}
-              />
               <Marker
                 coordinate={{
                   latitude: this.state.region.latitude,
                   longitude: this.state.region.longitude,
                 }}
                 title={"i-see location"}
-                draggable />
+                draggable
+              />
             </MapView>
           </View>
         </View>
