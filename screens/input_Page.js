@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import {StyleSheet,View,Text,Dimensions,TextInput,
+import {
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  TextInput,
   Button,
 } from "react-native";
 import {
@@ -12,8 +17,6 @@ import Server from "../mongoDbServer";
 const screenWidth = Math.round(Dimensions.get("screen").width);
 const screenHeight = Math.round(Dimensions.get("screen").height);
 
-
-
 export default class InputPage extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +25,7 @@ export default class InputPage extends React.Component {
       description: null,
       latitudeGps: this.props.navigation.getParam("latitude", ""),
       longitudeGps: this.props.navigation.getParam("longitude", ""),
-      type: this.props.navigation.getParam("type", "")
+      type: this.props.navigation.getParam("type", ""),
     };
   }
 
@@ -51,7 +54,11 @@ export default class InputPage extends React.Component {
           placeholder={this.state.latitudeGps + " , " + this.state.longitudeGps}
           editable={false}
         />
-        <TextInput style={styles.inputSA} placeholder={this.state.type} editable={false} />
+        <TextInput
+          style={styles.inputSA}
+          placeholder={this.state.type}
+          editable={false}
+        />
         <View style={styles.container}>
           <MapView
             provider={PROVIDER_GOOGLE}
@@ -77,15 +84,16 @@ export default class InputPage extends React.Component {
           </MapView>
         </View>
         <Button
-          onPress={() =>
+          onPress={() => {
             server.setLocaion(
               name.text,
               latitudeGps,
               longitudeGps,
               description.text,
               type
-            )
-          }
+            );
+            this.props.navigation.goBack(null); //go back to priv page}
+          }}
           title="שלח"
           Color="#454F63"
         ></Button>
@@ -111,10 +119,10 @@ const styles = StyleSheet.create({
   buttonS: {
     backgroundColor: "skyblue",
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   textInButton: {
-    textAlign: "center"
+    textAlign: "center",
   },
   inputSN: {
     backgroundColor: "#454F63",
