@@ -56,4 +56,16 @@ export default class Server extends React.Component {
       })
       .catch(console.error);
   }
+  getLocationByGps(location) {
+    //read all items from collection in monogoDB
+    this.db
+      .collection("locations")
+      .find({x:location.coords.la}, { limit: 100 })
+      .asArray()
+      .then((locations) => {
+        console.log(locations);
+      });
+  }
+
+
 }

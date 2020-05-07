@@ -1,12 +1,5 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  Dimensions,
-  Item,
-  TextInput,
-  TouchableOpacity,
+import {StyleSheet,View,Text,Dimensions,TextInput,
   Button,
 } from "react-native";
 import {
@@ -19,7 +12,7 @@ import Server from "../mongoDbServer";
 const screenWidth = Math.round(Dimensions.get("screen").width);
 const screenHeight = Math.round(Dimensions.get("screen").height);
 
-const server = new Server(); //run server connect mongoDB
+
 
 export default class InputPage extends React.Component {
   constructor(props) {
