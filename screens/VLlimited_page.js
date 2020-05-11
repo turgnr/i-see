@@ -1,7 +1,6 @@
 import React, { } from 'react';
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import Server from "../mongoDbServer";
-import Landing from './landing_Page';
 import { Audio } from 'expo-av';
 import { pi,sin,cos,sqrt,atan2 } from 'mathjs';
 /**
