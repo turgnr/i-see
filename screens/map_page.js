@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import { MessageBar } from "react-native-messages";
 
 const screenWidth = Math.round(Dimensions.get("window").width);
 const screenHeight = Math.round(Dimensions.get("screen").height);
@@ -29,7 +30,7 @@ export default class mapP extends React.Component {
 
   onRegionChange = (region) => {
     this.setState({ region: region });
-  }
+  };
 
   render() {
     return (
@@ -94,6 +95,7 @@ export default class mapP extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
+        <MessageBar />
       </View>
     );
   }

@@ -13,6 +13,7 @@ import {
 } from "react-native-responsive-screen";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import Server from "../mongoDbServer";
+import { showMessage } from "react-native-messages";
 
 const screenWidth = Math.round(Dimensions.get("screen").width);
 const screenHeight = Math.round(Dimensions.get("screen").height);
@@ -30,6 +31,7 @@ export default class InputPage extends React.Component {
   }
 
   render() {
+    const server = new Server(); //run server connect mongoDB
     const { navigation } = this.props;
     let type = navigation.getParam("type", "");
     let latitudeGps = navigation.getParam("latitude", "");
@@ -42,12 +44,12 @@ export default class InputPage extends React.Component {
         <TextInput
           style={styles.inputSN}
           placeholder="  שם המקום"
-          onChangeText={(text) => (this.state.name = { text })}
+          onChangeText={(text) => (name = { text })}
         />
         <TextInput
           style={styles.inputSA}
           placeholder="  תיאור המקום"
-          onChangeText={(text) => (this.state.description = { text })}
+          onChangeText={(text) => (description = { text })}
         />
         <TextInput
           style={styles.inputSA}
@@ -92,6 +94,9 @@ export default class InputPage extends React.Component {
               description.text,
               type
             );
+            showMessage("הוספת המיקום בוצע בהצלחה", {
+              duration: 2500,
+            });
             this.props.navigation.goBack(null); //go back to priv page}
           }}
           title="שלח"
