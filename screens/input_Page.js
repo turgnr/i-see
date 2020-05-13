@@ -12,8 +12,6 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import Server from "../mongoDbServer";
-import { showMessage } from "react-native-messages";
 
 const screenWidth = Math.round(Dimensions.get("screen").width);
 const screenHeight = Math.round(Dimensions.get("screen").height);
@@ -31,7 +29,6 @@ export default class InputPage extends React.Component {
   }
 
   render() {
-    const server = new Server(); //run server connect mongoDB
     const { navigation } = this.props;
     let type = navigation.getParam("type", "");
     let latitudeGps = navigation.getParam("latitude", "");
@@ -87,13 +84,6 @@ export default class InputPage extends React.Component {
         </View>
         <Button
           onPress={() => {
-            server.setLocaion(
-              name.text,
-              latitudeGps,
-              longitudeGps,
-              description.text,
-              type
-            );
             showMessage("הוספת המיקום בוצע בהצלחה", {
               duration: 2500,
             });
