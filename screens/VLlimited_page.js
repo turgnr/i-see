@@ -18,7 +18,7 @@ export default class VLlimitedPage extends React.Component {
     };
     this.activeSound = this.activeSound.bind(this);
     this.deg2rad = this.deg2rad.bind(this);
-    this.getDistanceFromLatLonInKm = this.getDistanceFromLatLonInKm.bind(this);
+    this.upTo100 = this.upTo100.bind(this);
     this.activeSound();
   }
 
@@ -39,22 +39,22 @@ export default class VLlimitedPage extends React.Component {
       let source = require("../assets/clickOn.m4a");
       await this.soundObject.loadAsync(source);
       await this.soundObject.playAsync();
-    } catch (error) {}
+    } catch (error) { }
   }
 
   deg2rad(deg) {
     return deg * (pi / 180);
   }
-  getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+  upTo100(lat1, lon1, lat2, lon2) {
     var R = 6371; // Radius of the earth in km
     var dLat = this.deg2rad(lat2 - lat1); // deg2rad below
     var dLon = this.deg2rad(lon2 - lon1);
     var a =
       sin(dLat / 2) * sin(dLat / 2) +
       cos(this.deg2rad(lat1)) *
-        cos(this.deg2rad(lat2)) *
-        sin(dLon / 2) *
-        sin(dLon / 2);
+      cos(this.deg2rad(lat2)) *
+      sin(dLon / 2) *
+      sin(dLon / 2);
 
     var c = 2 * atan2(sqrt(a), sqrt(1 - a));
     var d = R * c; // Distance in km
@@ -69,7 +69,7 @@ export default class VLlimitedPage extends React.Component {
           onPress={() => {
             this.confingGPS();
             console.log(
-              this.getDistanceFromLatLonInKm(lat, long, check2lat, check2long)
+              this.upTo100(lat, long, check2lat, check2long)
             );
           }}
         >
