@@ -5,7 +5,7 @@ export const data = [
         long: 34.798055,
         discription:"תחנה אוטובוס ברגר",
         type: "תחנת אוטובוס",
-        sound:""
+        sound:'../assets/Bus Staion.m4a'
     },
     {
         name: "book shop",
@@ -13,7 +13,7 @@ export const data = [
         long: 34.799313,
         discription: "books",
         type: "אחר",
-        sound:""
+        sound:'../assets/Books Junction.m4a'
     },
     {
         name: "ice cream shop",
@@ -21,7 +21,7 @@ export const data = [
         long: 34.800300,
         discription: "גלידה",
         type: "מסעדה",
-        sound:""
+        sound:'../assets/Bus Staion.m4a'
     },
     {
         name: "aroma",
@@ -29,7 +29,7 @@ export const data = [
         long: 31.262571,
         discription: "ארומה",
         type: "מסעדה",
-        sound:""
+        sound:'../assets/Aroma.m4a'
     },
 
 ]

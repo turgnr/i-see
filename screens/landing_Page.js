@@ -10,7 +10,6 @@ import {
 const screenWidth = Math.round(Dimensions.get("screen").width);
 const screenHeight = Math.round(Dimensions.get("screen").height);
 
-const server = new Server();
 export default class Landing extends React.Component {
   constructor(props) {
     super(props);
