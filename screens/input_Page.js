@@ -12,10 +12,10 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
-
+import { showMessage } from "react-native-messages";
+import Fire from "../api/firebaseDb";
 const screenWidth = Math.round(Dimensions.get("screen").width);
 const screenHeight = Math.round(Dimensions.get("screen").height);
-
 export default class InputPage extends React.Component {
   constructor(props) {
     super(props);
@@ -29,24 +29,24 @@ export default class InputPage extends React.Component {
   }
 
   render() {
-    const { navigation } = this.props;
-    let type = navigation.getParam("type", "");
-    let latitudeGps = navigation.getParam("latitude", "");
-    let longitudeGps = navigation.getParam("longitude", "");
-    let name = "";
-    let description = "";
+    //const { navigation } = this.props;
+    //let type = navigation.getParam("type", "");
+    //let latitudeGps = navigation.getParam("latitude", "");
+    //let longitudeGps = navigation.getParam("longitude", "");
+    //let name = "";
+    //let description = "";
     return (
       <View style={styles.mainS}>
         <Text style={styles.text}>הוספת מיקום חדש</Text>
         <TextInput
           style={styles.inputSN}
           placeholder="  שם המקום"
-          onChangeText={(text) => (name = { text })}
+          onChangeText={(text) => (this.state.name = text)}
         />
         <TextInput
           style={styles.inputSA}
           placeholder="  תיאור המקום"
-          onChangeText={(text) => (description = { text })}
+          onChangeText={(text) => (this.state.description = text)}
         />
         <TextInput
           style={styles.inputSA}
@@ -84,8 +84,9 @@ export default class InputPage extends React.Component {
         </View>
         <Button
           onPress={() => {
+            Fire.storeLocaiton(this.state);
             showMessage("הוספת המיקום בוצע בהצלחה", {
-              duration: 2500,
+              duration: 2.5,
             });
             this.props.navigation.goBack(null); //go back to priv page}
           }}

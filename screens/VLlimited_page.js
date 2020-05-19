@@ -1,8 +1,16 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Alert, View, Text, ImageBackground } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+  View,
+  Text,
+  ImageBackground,
+} from "react-native";
 import { Audio } from "expo-av";
 import { pi, sin, cos, sqrt, atan2 } from "mathjs";
-import { data } from '../fakeDB';
+import { data } from "../fakeDB";
+import Fire from "../api/firebaseDb";
 /**
  * x and y for blind man
  */
@@ -14,27 +22,37 @@ export default class VLlimitedPage extends React.Component {
     this.state = {
       location: null,
     };
+    this.locations = [];
     this.activeSound = this.activeSound.bind(this);
     this.deg2rad = this.deg2rad.bind(this);
     this.upTo100 = this.upTo100.bind(this);
     this.startData = this.startData.bind(this);
-    this.activeSound(require('../assets/clickOn.m4a'));
+    this.activeSound(require("../assets/clickOn.m4a"));
+  }
+
+  componentDidMount() {
+    Fire.get((location) => this.locations.push(location));
+  }
+  componentWillUnmount() {
+    Fire.off();
   }
 
   /**
    * this function active the check if place is in 100m distance from the user location
-   * @param {latitud place location} lat 
-   * @param longitud place location} long 
+   * @param {latitud place location} lat
+   * @param longitud place location} long
    */
   startData(lat, long) {
-    listOfPlace = data.filter(place => this.upTo100(lat, long, place.lat, place.long));
-    this.activeSound(require('../assets/Books_Junction.m4a'));
-    //canot active all becuse is async 
+    listOfPlace = data.filter((place) =>
+      this.upTo100(lat, long, place.lat, place.long)
+    );
+    this.activeSound(require("../assets/Books_Junction.m4a"));
+    //canot active all becuse is async
     //this.activeSound(require('../assets/Bus_Staion.m4a'));
     //this.activeSound(require('../assets/Aroma.m4a'));
   }
   /**
-   * 
+   *
    */
   confingGPS = () => {
     navigator.geolocation.getCurrentPosition(
@@ -50,12 +68,12 @@ export default class VLlimitedPage extends React.Component {
     );
   };
   async activeSound(path) {
-    console.log('path ',path);
+    console.log("path ", path);
     this.soundObject = new Audio.Sound();
     try {
       await this.soundObject.loadAsync(path);
       await this.soundObject.playAsync();
-    } catch (error) { }
+    } catch (error) {}
   }
 
   deg2rad(deg) {
@@ -68,9 +86,9 @@ export default class VLlimitedPage extends React.Component {
     var a =
       sin(dLat / 2) * sin(dLat / 2) +
       cos(this.deg2rad(lat1)) *
-      cos(this.deg2rad(lat2)) *
-      sin(dLon / 2) *
-      sin(dLon / 2);
+        cos(this.deg2rad(lat2)) *
+        sin(dLon / 2) *
+        sin(dLon / 2);
 
     var c = 2 * atan2(sqrt(a), sqrt(1 - a));
     var d = R * c; // Distance in km
@@ -82,16 +100,17 @@ export default class VLlimitedPage extends React.Component {
       <View style={styles.container}>
         <ImageBackground
           source={require("../assets/VLBackGround.png")}
-          style={styles.image}>
+          style={styles.image}
+        >
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              if (this.state.location != null){
-                this.startData(lat,long);
-              }
-              else{
+              if (this.state.location != null) {
+                this.startData(lat, long);
+              } else {
                 this.confingGPS();
               }
+              console.log(this.locations);
             }}
           >
             <Text style={styles.text}> לחץ כאן לקבלת המיקום</Text>
