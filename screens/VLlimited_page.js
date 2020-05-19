@@ -22,7 +22,7 @@ export default class VLlimitedPage extends React.Component {
     this.state = {
       location: null,
     };
-    this.locations = [];
+    this.locations = []; //locaiton from firebase
     this.activeSound = this.activeSound.bind(this);
     this.deg2rad = this.deg2rad.bind(this);
     this.upTo100 = this.upTo100.bind(this);
