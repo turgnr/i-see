@@ -12,6 +12,7 @@ import { pi, sin, cos, sqrt, atan2 } from "mathjs";
 import { data } from "../fakeDB";
 import Fire from "../api/firebaseDb";
 import parseErrorStack from "react-native/Libraries/Core/Devtools/parseErrorStack";
+
 /**
  * x and y for blind man
  */
@@ -26,11 +27,17 @@ export default class VLlimitedPage extends React.Component {
     this.distTemp = null; //temp distance for location
     this.locations = []; //locaiton from firebase
     this.locationsFromMy = [];
+    this.listofSound = [
+      require("../assets/Bus_Staion.m4a"),
+      require("../assets/Books_Junction.m4a"),
+      require("../assets/Aroma.m4a"),
+    ];
     this.activeSound = this.activeSound.bind(this);
     this.deg2rad = this.deg2rad.bind(this);
     this.upTo100 = this.upTo100.bind(this);
     this.startData = this.startData.bind(this);
     this.searchFromMyLoca = this.searchFromMyLoca.bind(this);
+    this.playSound = this.playSound.bind(this);
     this.activeSound(require("../assets/clickOn.m4a"));
   }
 
@@ -47,6 +54,7 @@ export default class VLlimitedPage extends React.Component {
    * @param longitud place location} long
    */
   startData(lat, long) {
+    //Del
     listOfPlace = data.filter((place) =>
       this.upTo100(lat, long, place.lat, place.long)
     );
@@ -67,6 +75,7 @@ export default class VLlimitedPage extends React.Component {
           //this.startData(lat, long);
           this.searchFromMyLoca();
           console.log(this.locationsFromMy);
+          this.playSound(this.locationsFromMy.length, [0, 2]);
         }
       },
       (error) => Alert.alert("נא לאשר גישת מיקום כדי להמשיך"),
@@ -80,6 +89,19 @@ export default class VLlimitedPage extends React.Component {
       await this.soundObject.loadAsync(path);
       await this.soundObject.playAsync();
     } catch (error) {}
+  }
+
+  async playSound(times, numbers) {
+    ///back tomoro
+    if (times == -1) return;
+    var soundObject = new Audio.Sound();
+    await soundObject.loadAsync(this.listofSound[numbers[times - 1]]);
+    await soundObject.playAsync().then(async (playbackStatus) => {
+      setTimeout(() => {
+        soundObject.unloadAsync();
+        this.playSound(times - 1, numbers);
+      }, playbackStatus.playableDurationMillis);
+    });
   }
 
   deg2rad(deg) {
