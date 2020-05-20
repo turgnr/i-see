@@ -11,6 +11,7 @@ import { Audio } from "expo-av";
 import { pi, sin, cos, sqrt, atan2 } from "mathjs";
 import { data } from "../fakeDB";
 import Fire from "../api/firebaseDb";
+import parseErrorStack from "react-native/Libraries/Core/Devtools/parseErrorStack";
 /**
  * x and y for blind man
  */
@@ -22,11 +23,14 @@ export default class VLlimitedPage extends React.Component {
     this.state = {
       location: null,
     };
+    this.distTemp = null; //temp distance for location
     this.locations = []; //locaiton from firebase
+    this.locationsFromMy = [];
     this.activeSound = this.activeSound.bind(this);
     this.deg2rad = this.deg2rad.bind(this);
     this.upTo100 = this.upTo100.bind(this);
     this.startData = this.startData.bind(this);
+    this.searchFromMyLoca = this.searchFromMyLoca.bind(this);
     this.activeSound(require("../assets/clickOn.m4a"));
   }
 
@@ -60,7 +64,9 @@ export default class VLlimitedPage extends React.Component {
         const location = position;
         this.setState({ location });
         if (this.state.location != null) {
-          this.startData(lat, long);
+          //this.startData(lat, long);
+          this.searchFromMyLoca();
+          console.log(this.locationsFromMy);
         }
       },
       (error) => Alert.alert("נא לאשר גישת מיקום כדי להמשיך"),
@@ -92,7 +98,39 @@ export default class VLlimitedPage extends React.Component {
 
     var c = 2 * atan2(sqrt(a), sqrt(1 - a));
     var d = R * c; // Distance in km
+    this.distTemp = d * 1000;
     return parseInt(d * 1000) <= 100 ? true : false;
+  }
+
+  searchFromMyLoca() {
+    //get all the location from my GPS location in 100m
+    var lat = this.state.location.coords.latitude;
+    var lon = this.state.location.coords.longitude;
+    this.locationsFromMy = [];
+    for (let i = 0; i < this.locations.length; i++) {
+      //lat,lon my location //lat2,lon2 place location
+      //this.distTemp get the distance from upTo100 run
+      if (
+        this.upTo100(
+          lat,
+          lon,
+          this.locations[i].latitudeGps,
+          this.locations[i].longitudeGps
+        )
+      ) {
+        console.log(this.locations[i].name);
+        var loca = {
+          //temp locaiton for add to locationsFromMy
+          name: this.locations[i].name,
+          type: this.locations[i].type,
+          latitudeGps: this.locations[i].latitudeGps,
+          longitudeGps: this.locations[i].longitudeGps,
+          description: this.locations[i].description,
+          distance: this.distTemp,
+        };
+        this.locationsFromMy.push(loca);
+      }
+    }
   }
 
   render() {
@@ -105,12 +143,12 @@ export default class VLlimitedPage extends React.Component {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              if (this.state.location != null) {
-                this.startData(lat, long);
-              } else {
-                this.confingGPS();
-              }
-              console.log(this.locations);
+              //if (this.state.location != null) {
+              //  this.startData(lat, long);
+              //} else {
+              //  this.confingGPS();
+              //}
+              this.confingGPS();
             }}
           >
             <Text style={styles.text}> לחץ כאן לקבלת המיקום</Text>

@@ -38,7 +38,6 @@ class Fire {
         latitudeGps: location.latitudeGps,
         longitudeGps: location.longitudeGps,
         type: location.type,
-        distance: "100", //default
       });
   }
 
@@ -49,9 +48,8 @@ class Fire {
       latitudeGps,
       longitudeGps,
       type,
-      distance,
     } = locations.val();
-    return { name, description, latitudeGps, longitudeGps, type, distance };
+    return { name, description, latitudeGps, longitudeGps, type };
   };
 
   get = (callback) => {
