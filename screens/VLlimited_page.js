@@ -93,8 +93,8 @@ export default class VLlimitedPage extends React.Component {
 
   async playSound(times, numbers) {
     ///back tomoro
-    if (times == -1) return;
-    var soundObject = new Audio.Sound();
+    if (times == 0) return;
+    let soundObject = new Audio.Sound();
     await soundObject.loadAsync(this.listofSound[numbers[times - 1]]);
     await soundObject.playAsync().then(async (playbackStatus) => {
       setTimeout(() => {
