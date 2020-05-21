@@ -9,9 +9,7 @@ import {
 } from "react-native";
 import { Audio } from "expo-av";
 import { pi, sin, cos, sqrt, atan2 } from "mathjs";
-import { data } from "../fakeDB";
 import Fire from "../api/firebaseDb";
-import parseErrorStack from "react-native/Libraries/Core/Devtools/parseErrorStack";
 
 /**
  * x and y for blind man
@@ -35,7 +33,6 @@ export default class VLlimitedPage extends React.Component {
     this.activeSound = this.activeSound.bind(this);
     this.deg2rad = this.deg2rad.bind(this);
     this.upTo100 = this.upTo100.bind(this);
-    this.startData = this.startData.bind(this);
     this.searchFromMyLoca = this.searchFromMyLoca.bind(this);
     this.playSound = this.playSound.bind(this);
     this.activeSound(require("../assets/clickOn.m4a"));
@@ -47,22 +44,6 @@ export default class VLlimitedPage extends React.Component {
   componentWillUnmount() {
     Fire.off();
   }
-
-  /**
-   * this function active the check if place is in 100m distance from the user location
-   * @param {latitud place location} lat
-   * @param longitud place location} long
-   */
-  startData(lat, long) {
-    //Del
-    listOfPlace = data.filter((place) =>
-      this.upTo100(lat, long, place.lat, place.long)
-    );
-    this.activeSound(require("../assets/Books_Junction.m4a"));
-    //canot active all becuse is async
-    //this.activeSound(require('../assets/Bus_Staion.m4a'));
-    //this.activeSound(require('../assets/Aroma.m4a'));
-  }
   /**
    *
    */
@@ -72,7 +53,6 @@ export default class VLlimitedPage extends React.Component {
         const location = position;
         this.setState({ location });
         if (this.state.location != null) {
-          //this.startData(lat, long);
           this.searchFromMyLoca();
           console.log(this.locationsFromMy);
           this.playSound(this.locationsFromMy.length, [0, 2]);
@@ -92,8 +72,7 @@ export default class VLlimitedPage extends React.Component {
   }
 
   async playSound(times, numbers) {
-    ///back tomoro
-    if (times == 0) return;
+    if (times === 0) return;
     let soundObject = new Audio.Sound();
     await soundObject.loadAsync(this.listofSound[numbers[times - 1]]);
     await soundObject.playAsync().then(async (playbackStatus) => {
