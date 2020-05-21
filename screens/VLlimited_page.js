@@ -15,7 +15,7 @@ import Fire from "../api/firebaseDb";
  * x and y for blind man
  */
 const lat = 31.262232;
-const long = 34.798063;
+const long = 34.798263;
 export default class VLlimitedPage extends React.Component {
   constructor(props) {
     super(props);
@@ -30,6 +30,13 @@ export default class VLlimitedPage extends React.Component {
       require("../assets/Books_Junction.m4a"),
       require("../assets/Aroma.m4a"),
     ];
+    this.listofSoundDist = [
+      require("../assets/10.m4a"),
+      require("../assets/50.m4a"),
+      require("../assets/100.m4a"),
+    ];
+    this.ListNumSound = [];
+    this.ListNumSoundDist = [];
     this.activeSound = this.activeSound.bind(this);
     this.deg2rad = this.deg2rad.bind(this);
     this.upTo100 = this.upTo100.bind(this);
@@ -55,7 +62,7 @@ export default class VLlimitedPage extends React.Component {
         if (this.state.location != null) {
           this.searchFromMyLoca();
           console.log(this.locationsFromMy);
-          this.playSound(this.locationsFromMy.length, [0, 2]);
+          this.playSound(this.locationsFromMy.length, this.ListNumSound);
         }
       },
       (error) => Alert.alert("נא לאשר גישת מיקום כדי להמשיך"),
@@ -74,11 +81,17 @@ export default class VLlimitedPage extends React.Component {
   async playSound(times, numbers) {
     if (times === 0) return;
     let soundObject = new Audio.Sound();
+    let soundObjectDist = new Audio.Sound();
     await soundObject.loadAsync(this.listofSound[numbers[times - 1]]);
+    await soundObjectDist.loadAsync(this.listofSoundDist[numbers[times - 1]]);
     await soundObject.playAsync().then(async (playbackStatus) => {
       setTimeout(() => {
         soundObject.unloadAsync();
-        this.playSound(times - 1, numbers);
+        soundObjectDist.playAsync().then(async (playbackStatus2) => {
+          setTimeout(() => {
+            this.playSound(times - 1, numbers);
+          }, playbackStatus2.playableDurationMillis);
+        });
       }, playbackStatus.playableDurationMillis);
     });
   }
@@ -128,8 +141,17 @@ export default class VLlimitedPage extends React.Component {
           longitudeGps: this.locations[i].longitudeGps,
           description: this.locations[i].description,
           distance: this.distTemp,
+          soundDistance: null,
         };
+        if (this.locations[i].name == "aroma") {
+          loca.soundDistance = 2;
+          this.ListNumSoundDist.push(2);
+        } else if (this.locations[i].name == "8A") {
+          loca.soundDistance = 0;
+          this.ListNumSoundDist.push(0);
+        } else loca.soundDistance = 1;
         this.locationsFromMy.push(loca);
+        this.ListNumSound.push(loca.soundDistance);
       }
     }
   }
