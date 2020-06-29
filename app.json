@@ -23,7 +23,7 @@
       "package": "com.isee",
       "config": {
         "googleMaps": {
-          "apiKey": "AIzaSyArghtOggenvjwn9BucSV9k"
+          "apiKey": "##############"
         }
       }
     }
